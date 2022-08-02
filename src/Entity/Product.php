@@ -13,12 +13,11 @@ class Product implements \App\Service\Catalog\Product
     #[ORM\Column(type: 'uuid', nullable: false)]
     private UuidInterface $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: false)]
+    #[ORM\Column(type: 'string', length: 255, unique: true, nullable: false)]
     private string $name;
 
     #[ORM\Column(type: 'integer', nullable: false)]
     private string $priceAmount;
-
     public function __construct(string $id, string $name, int $price)
     {
         $this->id = Uuid::fromString($id);
