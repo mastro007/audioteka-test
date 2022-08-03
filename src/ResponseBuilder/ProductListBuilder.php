@@ -3,6 +3,7 @@
 namespace App\ResponseBuilder;
 
 use App\Service\Catalog\Product;
+use Carbon\Carbon;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProductListBuilder
@@ -34,7 +35,8 @@ class ProductListBuilder
             $data['products'][] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),
-                'price' => $product->getPrice()
+                'price' => $product->getPrice(),
+                'created_at' => Carbon::instance($product->getCreatedAt())->toDateTimeString()
             ];
         }
 

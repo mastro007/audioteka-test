@@ -19,8 +19,7 @@ class Cart implements \App\Service\Cart\Cart
     #[ORM\Column(type: 'uuid', nullable: false)]
     private UuidInterface $id;
 
-    #[ORM\ManyToMany(targetEntity: 'Product')]
-    #[ORM\JoinTable(name: 'cart_products')]
+    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: 'CartProduct')]
     private Collection $products;
 
     public function __construct(string $id)
