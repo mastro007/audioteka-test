@@ -54,4 +54,14 @@ class Product implements \App\Service\Catalog\Product
     {
         return $this->createdAt;
     }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
 }
