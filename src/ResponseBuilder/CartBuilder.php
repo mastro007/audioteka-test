@@ -17,7 +17,8 @@ class CartBuilder
             $data['products'][] = [
                 'id' => $product->getId(),
                 'name' => $product->getName(),
-                'price' => $product->getPrice()
+                'price' => $product->getPrice(),
+                'created_at' => $product->getCreatedAt()
             ];
         }
 

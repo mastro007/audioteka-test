@@ -35,11 +35,12 @@ class Cart implements \App\Service\Cart\Cart
 
     public function getTotalPrice(): int
     {
-        return array_reduce(
-            $this->products->toArray(),
-            static fn(int $total, Product $product): int => $total + $product->getPrice(),
-            0
-        );
+        $value = 0;
+        foreach ($this->products as $product) {
+            $value += $product->getProduct()->getPrice();
+        }
+
+        return $value;
     }
 
     #[Pure]
@@ -48,9 +49,15 @@ class Cart implements \App\Service\Cart\Cart
         return $this->products->count() >= self::CAPACITY;
     }
 
-    public function getProducts(): iterable
+    public function getProducts(): array
     {
-        return $this->products->getIterator();
+        $products = [];
+        foreach ($this->products as $row) {
+
+            $products[] = $row->getProduct();
+        }
+
+        return $products;
     }
 
     #[Pure]

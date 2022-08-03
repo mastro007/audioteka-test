@@ -21,11 +21,11 @@ class ProductRepository implements ProductProvider, ProductService
     public function getProducts(int $page = 0, int $count = 3): iterable
     {
         return $this->repository->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'desc')
             ->setMaxResults($count)
             ->setFirstResult($page * $count)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function getTotalCount(): int

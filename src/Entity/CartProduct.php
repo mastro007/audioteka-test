@@ -38,9 +38,9 @@ class CartProduct
     }
 
     /**
-     * @return Collection
+     * @return Product
      */
-    public function getProduct(): Collection
+    public function getProduct(): Product
     {
         return $this->product;
     }
