@@ -141,4 +141,20 @@ class ListControllerTest extends WebTestCase
             'products' => []
         ], $response);
     }
+
+    public function test_order_list_starts_from_recently_created(): void
+    {
+        $query = $this->entityManager->createQueryBuilder();
+        $newestProduct = $query
+            ->select('p.id')
+            ->from('products', 'p')
+            ->orderBy('p.created_at', 'desc')
+            ->getQuery()
+            ->getFirstResult();
+
+        $this->client->request('GET', '/products');
+        $results = $this->getJsonResponse();
+        self::assertTrue($results['products'][0]['id'] === $newestProduct);
+
+    }
 }

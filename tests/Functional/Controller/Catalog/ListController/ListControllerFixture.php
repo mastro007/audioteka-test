@@ -21,6 +21,7 @@ class ListControllerFixture extends AbstractFixture
         ];
 
         foreach ($products as $product) {
+            sleep(1);
             $manager->persist($product);
         }
 
