@@ -19,7 +19,8 @@ class Cart implements \App\Service\Cart\Cart
     #[ORM\Column(type: 'uuid', nullable: false)]
     private UuidInterface $id;
 
-    #[ORM\OneToMany(mappedBy: 'cart', targetEntity: 'CartProduct')]
+    #[ORM\ManyToMany( targetEntity: 'Product', indexBy: 'cart_id')]
+    #[ORM\JoinTable(name: 'cart_products')]
     private Collection $products;
 
     public function __construct(string $id)
@@ -37,7 +38,7 @@ class Cart implements \App\Service\Cart\Cart
     {
         $value = 0;
         foreach ($this->products as $product) {
-            $value += $product->getProduct()->getPrice();
+            $value += $product->getPrice();
         }
 
         return $value;
@@ -52,9 +53,9 @@ class Cart implements \App\Service\Cart\Cart
     public function getProducts(): array
     {
         $products = [];
-        foreach ($this->products as $row) {
+        foreach ($this->products as $product) {
 
-            $products[] = $row->getProduct();
+            $products[] = $product;
         }
 
         return $products;

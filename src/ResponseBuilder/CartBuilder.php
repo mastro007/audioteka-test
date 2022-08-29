@@ -18,7 +18,7 @@ class CartBuilder
                 'id' => $product->getId(),
                 'name' => $product->getName(),
                 'price' => $product->getPrice(),
-                'created_at' => $product->getCreatedAt()
+                'created_at' => $product->getCreatedAt()->format('Y-m-d')
             ];
         }
 

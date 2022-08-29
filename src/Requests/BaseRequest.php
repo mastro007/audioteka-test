@@ -41,7 +41,7 @@ abstract class BaseRequest
 
     public function getRequest(): array
     {
-        return Request::createFromGlobals()->request->all();
+        return json_decode((new Request())->getContent(), true) ?? [];
     }
 
     public function populate(): void

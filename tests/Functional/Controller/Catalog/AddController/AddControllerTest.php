@@ -7,11 +7,19 @@ use App\Tests\Functional\WebTestCase;
 
 class AddControllerTest extends WebTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+    }
+
     public function test_adds_product(): void
     {
-        $this->client->request('POST', '/products', [
-            'name' => 'Product name',
-            'price' => 1990,
+        $this->client->jsonRequest('POST', '/products', [
+
+            'name' => 'Product Testowy',
+            'price' => 1111
+
         ]);
 
         self::assertResponseStatusCodeSame(202);
@@ -27,10 +35,12 @@ class AddControllerTest extends WebTestCase
 
     public function test_product_with_empty_name_cannot_be_added(): void
     {
-        $this->client->request('POST', '/products', [
-            'name' => '    ',
-            'price' => 1990,
-        ]);
+        $payload = [
+            'name' => ' ',
+            'price' => 1111
+
+        ];
+        $this->client->jsonRequest('POST', '/products', $payload);
 
         self::assertResponseStatusCodeSame(422);
 
@@ -40,7 +50,7 @@ class AddControllerTest extends WebTestCase
 
     public function test_product_without_a_price_cannot_be_added(): void
     {
-        $this->client->request('POST', '/products', [
+        $this->client->jsonRequest('POST', '/products', [
             'name' => 'Product name',
         ]);
 
@@ -52,7 +62,7 @@ class AddControllerTest extends WebTestCase
 
     public function test_product_with_non_positive_price_cannot_be_added(): void
     {
-        $this->client->request('POST', '/products', [
+        $this->client->jsonRequest('POST', '/products', [
             'name' => 'Product name',
             'price' => 0,
         ]);

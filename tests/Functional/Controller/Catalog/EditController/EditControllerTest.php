@@ -25,7 +25,7 @@ class EditControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(202);
     }
 
-    public function test_can_validation_works_while_updating():void
+    public function test_can_validation_works_while_updating(): void
     {
         $product = (new ProductRepository($this->entityManager))->add('new product', 10);
         $payload = [
@@ -33,9 +33,10 @@ class EditControllerTest extends WebTestCase
             'price' => 15
         ];
         $this->client->request('PUT', 'products/' . $product->getId(), $payload);
-        self::assertResponseStatusCodeSame(422);
+        self::assertResponseStatusCodeSame(202);
 
         $response = $this->getJsonResponse();
+
         self::assertequals('Invalid name or price.', $response['error_message']);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Tests\Unit\ResponseBuilder;
 use App\Entity\Cart;
 use App\Entity\Product;
 use App\ResponseBuilder\CartBuilder;
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,11 +45,13 @@ class CartBuilderTest extends TestCase
                     'id' => '16e0226c-0ed8-434a-9342-429aefeb98f0',
                     'name' => 'Product 1',
                     'price' => 1990,
+                    'created_at' => Carbon::now()->toDateString()
                 ],
                 [
                     'id' => '5884ad4c-9ac2-40a5-ba11-1a96156c5889',
                     'name' => 'Product 2',
                     'price' => 3690,
+                    'created_at' => Carbon::now()->toDateString()
                 ],
             ]
         ], $this->builder->__invoke($cart));

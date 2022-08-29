@@ -36,7 +36,7 @@ class ProductListBuilder
                 'id' => $product->getId(),
                 'name' => $product->getName(),
                 'price' => $product->getPrice(),
-                'created_at' => Carbon::instance($product->getCreatedAt())->toDateTimeString()
+                'created_at' => Carbon::instance($product->getCreatedAt())->toDateString()
             ];
         }
 
